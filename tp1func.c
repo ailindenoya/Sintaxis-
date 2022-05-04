@@ -1,41 +1,70 @@
 #include <stdio.h>
 
-void longitudCadena(char *cad){
-    int i;
+int longitudCadena(char *cad){
+    
     int contador = 0; 
-    printf("ingrese la cadena: ");
-    scanf("%s/n",cad);
+    int i; 
     for(i=0;cad[i]!='\0';i++){
         contador++;  
     }
-    printf("longitud de cadena: %i", contador); 
+    return contador;  
 }
 
-void equivalenteNumerico(char *cad){
-    int i;
-    printf("ingrese la cadena: ");
-    scanf("%s/n",cad); 
-    for (i=0; cad[i]; i++){
-        printf(" %d", *(cad+i));
-    } 
-    
-}
-
-void convierteEnMayus(char *cad){
+int potencia (int x, int n){
+    int nro; 
     int i; 
-    printf("ingrese la cadena: ");
-    scanf("%s/n",cad);
-    for (i=0; cad[i]!='\0'; i++){
-    printf(" %c", *(cad+i)-32);
+    for (i=0; i<n; i++){
+        nro*=x;
     }
+    return nro; 
 
 }
 
-void quitaCaracter(char *cad, char car){
-    printf("ingrese la cadena: ");
-    scanf("%s/n",cad);
-    printf("ingrese caracter a quitar: ");
-    scanf("%s/n", &car);
+int equivalenteNumerico(char *cad){
+    
+     int numero, i; 
+
+     for (i=0; cad[i]; i++){
+        numero=numero *10;
+        switch (cad[i])
+        {
+            case '1':numero +=1;
+                break;
+            case '2':numero +=2;
+                break;
+            case '3':numero +=3;
+                break;
+            case '4':numero +=4;
+                break;
+            case '5':numero +=5;
+                break;
+            case '6':numero +=6;
+                break;
+            case '7':numero +=7;
+                break;
+            case '8':numero +=8;
+                break;
+            case '9':numero +=9;
+                break;
+            default:
+                break;
+        }
+    }
+    return numero; 
+}
+
+
+
+char * convierteEnMayus(char *cad){
+    int i;
+    for (i=0; cad[i]!='\0'; i++){
+      if(cad[i]>=97&&cad[i]<=122)
+        cad[i]=cad[i]-32;
+    }
+    return cad; 
+}
+
+char * quitaCaracter(char *cad, char car){
     int i,j =0; 
     
      for (int i=0; cad[i]!= '\0'; i++)
@@ -52,18 +81,14 @@ void quitaCaracter(char *cad, char car){
             i--;
         }
     }
-    printf("cadena sin caracter: %s", cad); 
+    return cad; 
 }
 
 
-void concatenaCadenas(char *cad1, char *cad2){
+char * concatenaCadenas(char *cad1, char *cad2){
     
     int i;
     int contador = 0; 
-    printf("ingrese la primer cadena: ");
-    scanf("%s/n",cad1);
-    printf("ingrese la segunda cadena: ");
-    scanf("%s/n",cad2);
     for(i=0;cad1[i]!='\0';i++)
     {
         contador++;
@@ -73,51 +98,63 @@ void concatenaCadenas(char *cad1, char *cad2){
         cad1[contador+i]=cad2[i];
     }
     cad1[contador+i]='\0';
-    printf("\nLa combinacion de las dos cadenas es: ");
-    for(i=0;cad1[i]!='\0';i++)
-    {
-        printf("%c",cad1[i]);
-    }
+    return cad1; 
 }
 
-void cambiaCaracter(char *cad,  char car, int pos){
-    
+char* agregaCaracter(char *cad,  char car, int pos){
+
     int i;
-    printf("Ingrese una cadena, el caracter y su posicion en donde insertarlo \n");
-    scanf("%s %c %d", cad, &car, &pos);
-
-    for(i = 0; cad[i] != '\0'; i++)
+    char aux,aux2;
+    aux=cad[pos];
+    cad[pos]=car;
+    for(i = pos+1; cad[i-1] != '\0'; i++)
     {
-        if(i == pos)
-        {
-            cad[i] = car; 
-        }
+        aux2=cad[i];
+        cad[i]=aux;
+        aux=aux2;
     }
 
-    printf("cadena nueva:  %s", cad);
-    
+    return cad;
+
 }
 
-void menu(int opcion, char *cad1, char *cad2, char car, int pos ) {
+void menu(int opcion, char*cad1, char*cad2, char car, int pos) {
+
 
     switch (opcion) {
         case 1:
-            longitudCadena(cad1);
+            printf("ingrese la cadena: ");
+            scanf("%s/n",cad1);
+            printf(" %d", longitudCadena(cad1));
             break;
         case 2:
-            equivalenteNumerico(cad1);
+            printf("ingrese la cadena: ");
+            scanf("%s/n",cad1); 
+            printf(" %d", equivalenteNumerico(cad1));
             break;
         case 3:
-            convierteEnMayus(cad1);
+            printf("ingrese la cadena: ");
+            scanf("%s/n",cad1); 
+            printf(" %s", convierteEnMayus(cad1));
             break;
         case 4:
-            quitaCaracter(cad1,car);
+             printf("ingrese la cadena: ");
+             scanf("%s/n",cad1);
+             printf("ingrese caracter a quitar: ");
+             scanf("%s/n", &car);
+             printf(" %s", quitaCaracter(cad1,car));
             break; 
         case 5:
-            concatenaCadenas(cad1,cad2);
+            printf("ingrese la primer cadena: ");
+            scanf("%s/n",cad1);
+            printf("ingrese la segunda cadena: ");
+            scanf("%s/n",cad2);
+            printf(" %s",concatenaCadenas(cad1,cad2));
             break; 
         case 6: 
-            cambiaCaracter(cad1,car,pos);
+            printf("Ingrese una cadena, el caracter y su posicion en donde insertarlo \n");
+            scanf("%s %c %d", cad1, &car, &pos);
+            printf(" %s",agregaCaracter(cad1,car,pos));
             break; 
     }
 }
@@ -125,10 +162,14 @@ void menu(int opcion, char *cad1, char *cad2, char car, int pos ) {
 
 int main () {
 
-    char car; 
-    int pos;
+    char a = 1; 
+
+
     char cad1[20] = {};
-    char cad2[20] = {}; 
+    char cad2[20] = {};  
+    char car; 
+    int pos; 
+
     int opcion = 0; 
 
     //Menú
@@ -140,12 +181,13 @@ int main () {
         printf("3 - convertir cadena en mayuscula \n");
         printf("4 - quitar caracter de cadena \n");
         printf("5 - concatenar cadenas \n");
-        printf("6 - cambiar caracter de cadena \n");
+        printf("6 - agrega caracter en cadena \n");
         printf("7 - salir \n\n");
         printf("----> ");
         scanf(" %i", &opcion);         
-        menu(opcion,cad1,cad2,car,pos);
+        menu(opcion,cad1,cad2,car, pos);
     }
+
 
 
 return 0; 
