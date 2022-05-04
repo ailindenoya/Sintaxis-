@@ -118,7 +118,13 @@ char* agregaCaracter(char *cad,  char car, int pos){
 
 }
 
-void menu(int opcion, char*cad1, char*cad2, char car, int pos) {
+void menu(int opcion) {
+
+    
+    char cad1[20] = {};
+    char cad2[20] = {};
+    char car; 
+    int pos;   
 
 
     switch (opcion) {
@@ -162,14 +168,6 @@ void menu(int opcion, char*cad1, char*cad2, char car, int pos) {
 
 int main () {
 
-    char a = 1; 
-
-
-    char cad1[20] = {};
-    char cad2[20] = {};  
-    char car; 
-    int pos; 
-
     int opcion = 0; 
 
     //Menú
@@ -185,7 +183,7 @@ int main () {
         printf("7 - salir \n\n");
         printf("----> ");
         scanf(" %i", &opcion);         
-        menu(opcion,cad1,cad2,car, pos);
+        menu(opcion);
     }
 
 
