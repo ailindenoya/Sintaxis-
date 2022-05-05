@@ -10,16 +10,6 @@ int longitudCadena(char *cad){
     return contador;  
 }
 
-int potencia (int x, int n){
-    int nro; 
-    int i; 
-    for (i=0; i<n; i++){
-        nro*=x;
-    }
-    return nro; 
-
-}
-
 int equivalenteNumerico(char *cad){
     
      int numero, i; 
